@@ -1,0 +1,121 @@
+<html>
+<head>
+<script language="JavaScript">
+	
+	var COUNT = 5;
+	var numbers = new Array();
+	var lucky = parseInt(Math.random()*17 + 1);
+	
+	function getNums()
+	{
+		console.log("getNums");
+		document.write("Five Numbers: ")
+		for (var i = 0; i<COUNT; i++)
+		{
+			numbers[i] = parseInt(Math.random()*47 + 1);
+			document.write(numbers[i] + " ");
+		}
+		document.write("<br> Lucky Number: " + lucky + "<br>");
+	}
+	getNums();
+
+	function sortnums()
+	{
+		console.log("sortnums");
+		//found on stackover flow to sort array numerically rather than alphabetically
+		numberSort = function(a,b) {
+			return a-b;
+		};
+		var sorted = numbers.sort(numberSort);
+		document.write("<br> Sorted: <br>");
+		document.write("Five Numbers: ")
+		for (var i = 0; i<COUNT; i++)
+		{
+			document.write(sorted[i] + " ");
+		}
+		document.write("<br> Lucky Number: " + lucky);
+	}
+	sortnums();
+
+	function payoutCalc() 
+	{
+		var extract_nums = document.getElementById('fivenums').value;
+		//taken from StackOverflow to turn array of strings to array of ints
+		var user_nums = extract_nums.split(" ").map(Number);
+		var user_lucky = document.getElementById('lucky').value;
+		var lucky_int = parseInt(user_lucky, 10);
+		// test to make sure I am extracting the right numbers
+		// for (var i = 0; i<COUNT; i++) {
+		// 	document.write(user_nums[i] + " ");
+		// }
+		// document.write(user_lucky);
+		var counter = 0;
+		for (var i = 0; i<COUNT; i++)
+		{
+			for (var n = 0; n<COUNT; n++)
+			{
+				if (numbers[i] === user_nums[n])
+				{
+					counter++;
+				}
+			}
+		}
+		if (lucky == user_lucky) {
+			counter+=6;
+		} 
+		//test counter
+		// document.write(counter);
+
+		switch(counter) {
+		case 0:
+			alert("Prize = $0");
+			break;
+		case 1:
+			alert("Prize = $0");
+			break;
+		case 2:
+			alert("Prize = $3");
+			break;
+		case 3:
+			alert("Prize = $20");
+			break;
+		case 4:
+			alert("Prize = $200");
+			break;
+		case 5:
+			alert("Prize = $25,000 a YEAR");
+			break;
+		case 6:
+			alert("Prize = $4");
+			break;
+		case 7:
+			alert("Prize = $6");
+			break;
+		case 8:
+			alert("Prize = $25");
+			break;
+		case 9:
+			alert("Prize = $150");
+			break;
+		case 10:
+			alert("Prize = $5,000");
+			break;
+		case 11:
+			alert("Prize = $7,000 a WEEK");
+			break;
+		default: 
+			alert("Prize unknown");
+		}
+	}
+</script>
+</head>
+<body>
+<form>
+	<br>
+	Five Numbers: <input type="text" name="numbers" id="fivenums"/>
+	Lucky Number: <input type="text" name="lucky" id="lucky"/>
+	<button onclick="payoutCalc()">Submit</button>
+
+</form>
+</body>
+</html>
